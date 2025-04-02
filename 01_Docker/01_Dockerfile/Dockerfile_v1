@@ -1,0 +1,14 @@
+# 베이스 이미지를 ubuntu:latest로 지정
+FROM ubuntu:latest
+# 작성자 레이블 생성
+LABEL maintainer="hong123 <hong123@gmail.com>"
+# 버전 레이블 생성
+LABEL version="2.0"
+# 베이스 이미지로 만들어진 컨테이너에서 실행할 명령어 작성
+RUN apt update
+# 이전 명령어가 실행된 이미지로 만들어진 컨테이너에서 실행할 명령어 작성
+RUN apt -y install sudo
+RUN sudo apt install net-tools
+# ENTRYPOINT와 CMD를 함께 사용하면 ENTRYPOINT 명령어의 인자로 CMD 명령어를 사용한다.
+ENTRYPOINT [ "/bin/bash", "-c" ]
+CMD [ "ifconfig", "-a" ]
