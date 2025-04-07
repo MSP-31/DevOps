@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: university-ingress
+  labels:
+    name: university-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  # 호스트 기반의 라우팅 (Host-Based Routing)
+  # 하나의 인그레스에서 여러 도메인 이름에 대해 서로 다른 서비스로 트래픽을 라우팅한다.
+  - host: beyond.university-api.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: university-api-service
+            port: 
+              number: 8088

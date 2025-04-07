@@ -24,10 +24,21 @@ spec:
             cpu: "1"
         # MariaDB 환경변수
         env:
+        # - name: MARIADB_ROOT_PASSWORD
+        #   value: root
+        # - name: TZ
+        #   value: Asia/Seoul
+        # 컨피그맵 & 시크릿 적용
         - name: MARIADB_ROOT_PASSWORD
-          value: root
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-secret
+              key: MARIADB_ROOT_PASSWORD
         - name: TZ
-          value: Asia/Seoul
+          valueFrom:
+            configMapKeyRef:
+              name: mariadb-config
+              key: TIME_ZONE
         ports:
         - containerPort: 3306
         # 볼륨 연결
