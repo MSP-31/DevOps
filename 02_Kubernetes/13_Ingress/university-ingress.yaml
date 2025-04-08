@@ -4,8 +4,17 @@ metadata:
   name: university-ingress
   labels:
     name: university-ingress
+  annotations:
+    # 어떤 발급자를 통해 인증서를 발급받을지 결정한다.
+    cert-manager.io/cluster-issuer: selfsigned-cluster-issuer
 spec:
   ingressClassName: nginx
+  # 인증서를 적용할 도메인을 설정한다.
+  tls:
+  - secretName: university-tls-secret
+    hosts:
+    - beyond.university-api.com
+    - beyond.university-app.com
   rules:
   # 호스트 기반의 라우팅 (Host-Based Routing)
   # 하나의 인그레스에서 여러 도메인 이름에 대해 서로 다른 서비스로 트래픽을 라우팅한다.

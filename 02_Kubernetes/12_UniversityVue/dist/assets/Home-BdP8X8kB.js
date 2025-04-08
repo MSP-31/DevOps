@@ -1,0 +1,1 @@
+import{_ as o}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{a as r,b as n,o as t}from"./index-DM-DOCCZ.js";const a={};function s(c,e){return t(),r("main",null,e[0]||(e[0]=[n("p",null,"메인 화면입니다.",-1)]))}const f=o(a,[["render",s]]);export{f as default};
