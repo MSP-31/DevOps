@@ -19,3 +19,14 @@ spec:
             name: university-api-service
             port: 
               number: 8088
+  - host: beyond.university-app.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: university-vue-service
+            port:
+              number: 80
+            

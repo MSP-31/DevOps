@@ -11,4 +11,4 @@ spec:
   storageClassName: manual
   persistentVolumeReclaimPolicy: Delete
   hostPath:
-    path: /private/mariadb
+    path: /run/desktop/mnt/host/c/Users/user/.docker/mariadb
