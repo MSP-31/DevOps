@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-ingress
+  namespace: argocd
+  annotations:
+    # 어떤 발급자를 통해 인증서를 발급받을지 결정한다.
+    cert-manager.io/cluster-issuer: selfsigned-cluster-issuer
+    # HTTP 요청을 HTTPS로 자동 리다이렉트 하도록 설정
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    # Ingress Controller가 백엔드와 통신할 때 사용할 프로토콜을 설정
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  ingressClassName: nginx
+  tls:
+  - secretName: argocd-tls-secret
+    hosts:
+    - argocd.beyond.com
+  rules:
+  - host: argocd.beyond.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: argocd-server
+            port: 
+              number: 443
